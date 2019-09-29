@@ -13,13 +13,6 @@
 
 // the "Robot::" will add the function multiply to the class robot
 
-double Robot::Absolute_Multiply(double first_num, double second_num){
-  double result = first_num * second_num;
-  if (result < 0){
-  result *= -1;
-  }
-  return result;
-}
 
 
 
@@ -45,8 +38,21 @@ void Robot::AutonomousPeriodic() {
 
 }
 
-void Robot::TeleopInit() {}
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopInit() {
+
+}
+void Robot::TeleopPeriodic() {
+  double speed = pilot.GetY(LEFT);
+  double turn = pilot.GetX(LEFT);
+  driveTrain.ArcadeDrive(speed,turn,false);
+
+  if (fabs(speed) < DEADZONE){
+      speed = 0;
+  }
+  if(fabs(turn) < DEADZONE){
+      turn = 0;
+  }
+}
 
 void Robot::TestPeriodic() {}
 
