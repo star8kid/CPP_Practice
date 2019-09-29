@@ -9,6 +9,7 @@
 
 #include <iostream>
 
+/
 #include <frc/smartdashboard/SmartDashboard.h>
 
 // the "Robot::" will add the function multiply to the class robot
@@ -42,16 +43,21 @@ void Robot::TeleopInit() {
 
 }
 void Robot::TeleopPeriodic() {
-  double speed = pilot.GetY(LEFT);
-  double turn = pilot.GetX(LEFT);
-  driveTrain.ArcadeDrive(speed,turn,false);
+  double ySpeed = pilot.GetY(LEFT);
+  double xSpeed = pilot.GetX(LEFT);
+  double turn = pilot.GetX(RIGHT);
+  driveTrain.DriveCartesian(ySpeed,xSpeed,turn);
 
-  if (fabs(speed) < DEADZONE){
-      speed = 0;
+  if (fabs(xSpeed) < DEADZONE){
+      xSpeed = 0;
+  }
+  if(fabs(ySpeed) < DEADZONE){
+        ySpeed = 0;
   }
   if(fabs(turn) < DEADZONE){
-      turn = 0;
+        turn = 0;
   }
+  
 }
 
 void Robot::TestPeriodic() {}

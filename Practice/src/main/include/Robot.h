@@ -34,13 +34,14 @@ class Robot : public frc::IterativeRobot {
   WPI_TalonSRX back_left{LEFT_BACK};
   WPI_TalonSRX back_right{RIGHT_BACK};
 
-  frc::SpeedControllerGroup leftSide{fr_left, fr_right};
-  frc::SpeedControllerGroup rightSide{back_left, back_right};
+  //frc::SpeedControllerGroup leftSide{fr_left, fr_right};
+  //frc::SpeedControllerGroup rightSide{back_left, back_right};
 
-  frc::DifferentialDrive driveTrain{leftSide,rightSide};
+  frc::MecanumDrive driveTrain{fr_left,back_left,fr_right,back_right};
 
   frc::XboxController pilot{0};
   frc::GenericHID::JoystickHand LEFT = frc::GenericHID :: kLeftHand;
+  frc::GenericHID::JoystickHand RIGHT= frc::GenericHID :: kRightHand;
 
 
  private:
